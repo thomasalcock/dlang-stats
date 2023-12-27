@@ -40,11 +40,18 @@ double coef_of_variation(double[] data) {
   return standard_deviation(data) / mean(data);
 }
 
-void is_close_enough(double x, double y) {
-  double diff = abs(x - y);
-  if (diff > 1.16992e-06) {
-    writeln("Values: ", x, " ", y, " differ by ", diff);
+bool is_close_enough(double x, double y) {
+  return abs(x - y) < 1.16992e-06;
+}
+
+bool is_close_enough_slice(double[] actual, double[] expected) {
+  assert(actual.length == expected.length);
+  for (int i = 0; i < actual.length; i++) {
+    if (!is_close_enough(actual[i], expected[i])) {
+      return false;
+    }
   }
+  return true;
 }
 
 ulong[] dim(double[][] matrix) {
@@ -83,6 +90,32 @@ void print_matrix(double[][] matrix) {
     writeln(row);
   }
   writeln("\n");
+}
+
+double dotproduct(double[] x, double[] y) {
+  double result = 0;
+  assert(x.length == y.length);
+  for (int i = 0; i < x.length; i++) {
+    result += x[i] * y[i];
+  }
+  return result;
+}
+
+double[][] inverse(double[][] matrix) {
+  assert(is_square_matrix(matrix));
+  
+  ulong nrows = matrix.length;
+  ulong ncols = matrix[0].length;
+  double[][] result;
+
+  alloc_matrix(result, nrows, ncols);
+  double det = determinant(matrix);
+  for (int i = 0; i < nrows; i++) {
+    for (int j = 0; j < ncols; j++) {
+      result[i][j] = pow(-1, i+j) * determinant(minor_matrix(matrix, i, j));
+    }
+  }
+  return result;
 }
 
 double[][] matmul(double[][] A, double[][] B) {
