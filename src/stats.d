@@ -2,6 +2,10 @@ module stats;
 
 import std.stdio : writeln;
 import std.math: sqrt, pow, abs;
+import std.random: uniform;
+
+// TODO: implement a dimension check that iterates over all
+// rows of a matrix to ensure uniform column dimension
 
 double mean(double[] data) {
   double result = 0.0;
@@ -218,4 +222,22 @@ double determinant(double[][] matrix) {
         }
     }
     return result;
+}
+
+double[][] uniform_matrix(ulong nrows, ulong ncols) {
+  double[][] result = new double[][](nrows, ncols);
+  for(int i = 0; i < nrows; i++) {
+    for(int j = 0; j < ncols; j++) {
+      result[i][j] = uniform(0.0, 1.0);
+    }
+  }
+  return result;
+}
+
+double[] uniform_slice(ulong length) {
+  double[] result = new double[](length);
+  for(int i = 0; i < length; i++) {
+     result[i] = uniform(0.0, 1.0);
+  }
+  return result;
 }

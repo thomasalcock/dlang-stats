@@ -127,5 +127,12 @@ unittest {
     writeln("inverse(testmatrix_3x3)");
     print_matrix(inv_testmatrix_3x3_actual);
 
-    
+    double[] random_slice = uniform_slice(10);
+    assert(random_slice.length == 10);
+    writeln("uniform_slice(10) = ", random_slice, "\n");
+
+    double[][] random_matrix = uniform_matrix(3, 4);
+    assert(random_matrix.length == 3 && random_matrix[0].length == 4);
+    writeln("uniform_matrix(3, 4) = ");
+    print_matrix(random_matrix);
 }
