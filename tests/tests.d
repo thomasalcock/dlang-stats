@@ -61,7 +61,7 @@ unittest {
         [4, 5], 
         [10, 11]
     ];
-    double[][] testmatrix = [
+    double[][] testmatrix_2x2 = [
         [2.0, 3.0],
         [4.0, 5.0]
     ];
@@ -69,6 +69,14 @@ unittest {
         [2, 1, 3],
         [0, -1, 4],
         [-1, 2, 1]
+    ];
+    double[][] inv_testmatrix_2x2 = [
+        [-2.5, 1.5], [2.0, -1.0]
+    ];
+    double[][] inv_testmatrix_3x3 = [
+        [0.36, -0.2, -0.28],
+        [0.16, -0.2, 0.32],
+        [0.04, 0.2, 0.08]
     ];
     
     writeln("A: ");
@@ -99,22 +107,25 @@ unittest {
     writeln("trace(AAt) = ", trace_A);
     
     writeln("testmatrix: ");
-    print_matrix(testmatrix);
+    print_matrix(testmatrix_2x2);
 
-    double det_A = determinant(testmatrix);
+    double det_A = determinant(testmatrix_2x2);
     assert(is_close_enough(det_A, -2));
-    writeln("determinant(testmatrix) = ", det_A);
+    writeln("determinant(testmatrix_2x2) = ", det_A);
 
-    double[][] inv_testmatrix = inverse(testmatrix);
-    writeln("inverse(testmatrix)");
-    print_matrix(inv_testmatrix);
+    double[][] inv_testmatrix_2x2_actual = inverse(testmatrix_2x2);
+    assert(inv_testmatrix_2x2_actual == inv_testmatrix_2x2);
+    writeln("inverse(testmatrix_2x2)");
+    print_matrix(inv_testmatrix_2x2_actual);
 
     double det_testmatrix_3x3 = determinant(testmatrix_3x3);
-    //assert(is_close_enough(det_A, -2));
+    assert(is_close_enough(det_testmatrix_3x3 , -25), "is_close_enough(det_testmatrix_3x3 , -25) != true");
     writeln("determinant(testmatrix_3x3) = ", det_testmatrix_3x3);
 
-    double[][] inv_testmatrix_3x3 = inverse(testmatrix_3x3);
+    double[][] inv_testmatrix_3x3_actual = inverse(testmatrix_3x3);
+    assert(inv_testmatrix_3x3_actual == inv_testmatrix_3x3, "inv_testmatrix_3x3_actual != inv_testmatrix_3x3");
     writeln("inverse(testmatrix_3x3)");
-    print_matrix(inv_testmatrix_3x3);
+    print_matrix(inv_testmatrix_3x3_actual);
 
+    
 }
