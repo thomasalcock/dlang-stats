@@ -1,13 +1,38 @@
-target=test_stats
-src=stats.d main.d tests.d
+d_compiler=dmd
+
+target_release=targets/stats_release
+target_debug=targets/stats_debug
+
+src=src/stats.d src/main.d 
+tests=tests/tests.d
+include_paths=-I=src -I=tests
+
 docs=docs
-flags=-O -D -Dd$(docs) -w -of=$(target) -unittest
 
-build:
-	dmd $(src) $(flags) 
+.PHONY: benchmarks man
 
-run: build
-	./$(target)
+flags_release=$(include_paths) -O -inline -D -Dd$(docs) -w -of=$(target_release)  -unittest
+flags_debug=$(include_paths) -debug -D -Dd$(docs) -w -of=$(target_debug) -unittest
+
+all: run_debug
+
+build_debug:
+	$(d_compiler) $(src) $(tests) $(flags_debug)
+
+build_release:
+	$(d_compiler) $(src) $(tests) $(flags_release)
+
+run_debug: build_debug
+	./$(target_debug)
+
+run_release: build_release
+	./$(target_release)
 
 clean:
-	rm *.o $(target)
+	rm *.o targets/*
+
+benchmarks:
+	Rscript benchmarks/test.R
+
+man:
+	dmd --help | less

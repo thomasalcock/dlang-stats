@@ -12,9 +12,11 @@ double mean(double[] data) {
   return result / data.length;
 }
 
-double[] zscore(double[] data, double mean, double stddev) {
+double[] zscore(double[] data) {
   double[] scores = new double[](data.length);
-  scores[] = (data[] - mean) / stddev;
+  double mean_data= mean(data);
+  double stddev_data = standard_deviation(data);
+  scores[] = (data[] - mean_data) / stddev_data;
   return scores;
 }
 
@@ -47,7 +49,9 @@ bool is_close_enough(double x, double y) {
 bool is_close_enough_slice(double[] actual, double[] expected) {
   assert(actual.length == expected.length);
   for (int i = 0; i < actual.length; i++) {
-    if (!is_close_enough(actual[i], expected[i])) {
+    bool check = !is_close_enough(actual[i], expected[i]);
+    writeln(check);
+    if (check) {
       return false;
     }
   }

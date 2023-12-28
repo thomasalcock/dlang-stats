@@ -3,8 +3,8 @@ import std.stdio : writeln;
 import std.uni;
 import stats;
 
-void main() {
-
-  double[] x = [1, 2, 3, 4, 5];
-  
+void main()
+{	
+	
+	writeln("Welcome to dlang-stats v0.1.0!");
 }

@@ -1,2 +1,3 @@
-test_stats
+stats_debug
+stats_release
 *.o
