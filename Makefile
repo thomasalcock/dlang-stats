@@ -14,7 +14,7 @@ docs=docs
 flags_release=$(include_paths) -O -inline -D -Dd$(docs) -w -of=$(target_release)  -unittest
 flags_debug=$(include_paths) -debug -D -Dd$(docs) -w -of=$(target_debug) -unittest
 
-all: run_debug
+all: run_debug run_release
 
 build_debug:
 	$(d_compiler) $(src) $(tests) $(flags_debug)
@@ -29,7 +29,7 @@ run_release: build_release
 	./$(target_release)
 
 clean:
-	rm *.o targets/*
+	rm targets/*.o targets/$(target_debug) targets/$(target_release)
 
 benchmarks:
 	Rscript benchmarks/test.R

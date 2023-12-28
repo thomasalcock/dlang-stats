@@ -1,6 +1,5 @@
 module main;
 import std.stdio : writeln;
-import std.uni;
 import stats;
 
 void main()
