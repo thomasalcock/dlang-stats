@@ -21,7 +21,7 @@ double[] zscore(double[] data) {
 }
 
 double weighted_mean(double[] data, double[] weights) {
-  assert(data.length == weights.length);
+  assert(data.length == weights.length, "weighted_mean: data and weights have different lengths!");
   double result = 0.0;
   for (int i = 0; i < data.length; i++) {
       result += data[i] * weights[i];
@@ -47,7 +47,7 @@ bool is_close_enough(double x, double y) {
 }
 
 bool is_close_enough_slice(double[] actual, double[] expected) {
-  assert(actual.length == expected.length);
+  assert(actual.length == expected.length, "is_close_enough_slice: actual and expected have different lengths!");
   for (int i = 0; i < actual.length; i++) {
     bool check = !is_close_enough(actual[i], expected[i]);
     writeln(check);
@@ -98,7 +98,7 @@ void print_matrix(double[][] matrix) {
 
 double dotproduct(double[] x, double[] y) {
   double result = 0;
-  assert(x.length == y.length);
+  assert(x.length == y.length, "dotproduct: x and y do not have equal length!");
   for (int i = 0; i < x.length; i++) {
     result += x[i] * y[i];
   }
@@ -106,7 +106,7 @@ double dotproduct(double[] x, double[] y) {
 }
 
 double[][] inverse(double[][] matrix) {
-  assert(is_square_matrix(matrix));
+  assert(is_square_matrix(matrix), "Matrix is not square!");
   
   ulong nrows = matrix.length;
   ulong ncols = matrix[0].length;
@@ -114,9 +114,13 @@ double[][] inverse(double[][] matrix) {
 
   alloc_matrix(result, nrows, ncols);
   double det = determinant(matrix);
+  assert(det != 0, "inverse: Determinant is 0, matrix is singular!");
+  double inv_det = 1/det;
   for (int i = 0; i < nrows; i++) {
     for (int j = 0; j < ncols; j++) {
-      result[i][j] = pow(-1, i+j) * determinant(minor_matrix(matrix, i, j));
+      // somehow the indices need to be switched to get the correct result, otherwise the resulting matrix
+      // needs to be transposed again
+      result[j][i] = inv_det * pow(-1, i+j) * determinant(minor_matrix(matrix, i, j));
     }
   }
   return result;
@@ -124,7 +128,7 @@ double[][] inverse(double[][] matrix) {
 
 double[][] matmul(double[][] A, double[][] B) {
   // A(n x k) * B(k x m) -> C(n x m)
-  assert(A[0].length == B.length); // these dimensions should be k
+  assert(A[0].length == B.length, "matmul: Matrix dimensions do not match!"); // these dimensions should be k
   
   ulong n = A.length;
   ulong k = A[0].length;
@@ -154,7 +158,7 @@ bool is_square_matrix(double[][] matrix) {
 }
 
 double trace(double[][] matrix) {
-  assert(is_square_matrix(matrix));
+  assert(is_square_matrix(matrix), "trace: Matrix is not square!");
   
   ulong nrows = matrix.length;
   ulong ncols = matrix[0].length;
@@ -196,7 +200,7 @@ double[][] minor_matrix(double[][] matrix, ulong row_index, ulong col_index) {
 }
   
 double determinant(double[][] matrix) {
-    assert(is_square_matrix(matrix));
+    assert(is_square_matrix(matrix), "determinannt: Matrix is not square!");
     double result = 0;
     ulong nrows = matrix.length;
     ulong ncols = matrix[0].length;

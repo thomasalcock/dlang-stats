@@ -57,12 +57,23 @@ unittest {
         [68, 167, 266, 365]
     ];
     double[][] A_minor = [
-        [1, 2], [4, 5], [10, 11]
+        [1, 2], 
+        [4, 5], 
+        [10, 11]
     ];
     double[][] testmatrix = [
         [2.0, 3.0],
         [4.0, 5.0]
     ];
+    double[][] testmatrix_3x3 = [
+        [2, 1, 3],
+        [0, -1, 4],
+        [-1, 2, 1]
+    ];
+    
+    writeln("A: ");
+    print_matrix(A);
+
     double[] vec1 = [1, 2, 3, 4];
     double dp = dotproduct(vec1, vec1);
     assert(is_close_enough(dp, 30));
@@ -70,21 +81,40 @@ unittest {
 
     double[][] At_actual = transpose(A);
     assert(At_actual == At);
+    writeln("transpose(A): ");
     print_matrix(At_actual);
 
     double[][] A_minor_actual = minor_matrix(A, 2, 2);
     assert(A_minor_actual == A_minor);
+    writeln("minor_matrix(A, 2, 2): ");
     print_matrix(A_minor_actual);
 
     double[][] AAt_actual = matmul(A, At_actual);
     assert(AAt_actual == AAt);
+    writeln("matmul(A, t(A)): ");
     print_matrix(AAt_actual);
     
     double trace_A = trace(AAt);
     assert(is_close_enough(trace_A, 650));
     writeln("trace(AAt) = ", trace_A);
     
+    writeln("testmatrix: ");
+    print_matrix(testmatrix);
+
     double det_A = determinant(testmatrix);
     assert(is_close_enough(det_A, -2));
     writeln("determinant(testmatrix) = ", det_A);
+
+    double[][] inv_testmatrix = inverse(testmatrix);
+    writeln("inverse(testmatrix)");
+    print_matrix(inv_testmatrix);
+
+    double det_testmatrix_3x3 = determinant(testmatrix_3x3);
+    //assert(is_close_enough(det_A, -2));
+    writeln("determinant(testmatrix_3x3) = ", det_testmatrix_3x3);
+
+    double[][] inv_testmatrix_3x3 = inverse(testmatrix_3x3);
+    writeln("inverse(testmatrix_3x3)");
+    print_matrix(inv_testmatrix_3x3);
+
 }
