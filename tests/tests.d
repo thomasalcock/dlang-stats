@@ -1,15 +1,25 @@
 import std.stdio : writeln;
-import std.uni;
-import stats;
 
 unittest {
-  double[] x = [1, 2, 3, 4, 5];
-  assert(remove(x, 2) == [1, 2, 4, 5]);
-  assert(remove(x, 0) == [2, 3, 4, 5]);
-  assert(remove(x, 4) == [1, 2, 3, 4]);
+    import stats: remove, uniform_slice;
+    writeln("array functions");
+    double[] x = [1, 2, 3, 4, 5];
+
+    //assert(is_in_array(x, 3));
+    assert(remove(x, 2) == [1, 2, 4, 5]);
+    assert(remove(x, 0) == [2, 3, 4, 5]);
+    assert(remove(x, 4) == [1, 2, 3, 4]);
+
+    double[] random_slice = uniform_slice(10);
+    assert(random_slice.length == 10);
+    writeln("uniform_slice(10) = ", random_slice, "\n");
+
 }
 
 unittest {
+    import stats: mean, standard_deviation, weighted_mean, coef_of_variation, 
+        zscore, is_close_enough, is_close_enough_slice;
+    
     writeln("stats functions");
     double[] x = [1, 2, 3, 4, 5];
     double[] w = [.1, .2, .3, .4, .5];
@@ -38,6 +48,9 @@ unittest {
 }
 
 unittest {
+    import stats: dotproduct, is_close_enough, print_matrix, minor_matrix,
+        determinant, inverse, transpose, matmul, uniform_matrix, trace;
+    
     writeln("matrix / linalg functions");      
     double[][] A = [
         [1, 2, 3],
@@ -126,10 +139,6 @@ unittest {
     assert(inv_testmatrix_3x3_actual == inv_testmatrix_3x3, "inv_testmatrix_3x3_actual != inv_testmatrix_3x3");
     writeln("inverse(testmatrix_3x3)");
     print_matrix(inv_testmatrix_3x3_actual);
-
-    double[] random_slice = uniform_slice(10);
-    assert(random_slice.length == 10);
-    writeln("uniform_slice(10) = ", random_slice, "\n");
 
     double[][] random_matrix = uniform_matrix(3, 4);
     assert(random_matrix.length == 3 && random_matrix[0].length == 4);
