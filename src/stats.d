@@ -224,20 +224,22 @@ double determinant(double[][] matrix) {
     return result;
 }
 
-double[][] uniform_matrix(ulong nrows, ulong ncols) {
+double[][] uniform_matrix(ulong nrows, ulong ncols, double min = 0.0, double max = 1.0) {
+  assert(max > min, "uniform_slice: value for argument 'min‘ must be greater than value for argument 'max'!");
   double[][] result = new double[][](nrows, ncols);
   for(int i = 0; i < nrows; i++) {
     for(int j = 0; j < ncols; j++) {
-      result[i][j] = uniform(0.0, 1.0);
+      result[i][j] = uniform(min, max);
     }
   }
   return result;
 }
 
-double[] uniform_slice(ulong length) {
+double[] uniform_slice(ulong length, double min = 0.0, double max = 1.0) {
+  assert(max > min, "uniform_slice: value for argument 'min‘ must be greater than value for argument 'max'!");
   double[] result = new double[](length);
   for(int i = 0; i < length; i++) {
-     result[i] = uniform(0.0, 1.0);
+     result[i] = uniform(min, max);
   }
   return result;
 }
