@@ -109,7 +109,7 @@ double dotproduct(double[] x, double[] y) {
   return result;
 }
 
-double[][] inverse(double[][] matrix) {
+double[][] naive_inverse(double[][] matrix) {
   assert(is_square_matrix(matrix), "Matrix is not square!");
   
   ulong nrows = matrix.length;
@@ -118,7 +118,7 @@ double[][] inverse(double[][] matrix) {
 
   alloc_matrix(result, nrows, ncols);
   double det = determinant(matrix);
-  assert(det != 0, "inverse: Determinant is 0, matrix is singular!");
+  assert(det != 0, "naive_inverse: Determinant is 0, matrix is singular!");
   double inv_det = 1/det;
   for (int i = 0; i < nrows; i++) {
     for (int j = 0; j < ncols; j++) {

@@ -1,22 +1,21 @@
 module main;
-import stats: uniform_matrix, print_matrix, matmul, transpose, is_square_matrix, inverse;
 import std.stdio : writeln;
+import stats: uniform_matrix, naive_inverse,
+	matmul, transpose, is_square_matrix;
 
 void main()
 {	
-	double[][] A = uniform_matrix(4, 3, 3, 10);
-    double[][] B = uniform_matrix(4, 3, 4, 16);
-
-	writeln("Matrix A: ");
-    print_matrix(A);
-	writeln("Matrix B: ");
-	print_matrix(B);
+	ulong nrows = 5;
+	ulong ncols = 5;
 	
-	double[][] C = matmul(A, transpose(B));
-	writeln("Matrix C = A x t(B) : ");
-	print_matrix(C);
+	writeln("set up matrix A: ");
+	double[][] A = uniform_matrix(nrows, ncols, 3, 10);
+	writeln("set up matrix B: ");
+    double[][] B = uniform_matrix(nrows, ncols, 4, 16);
 
-	double[][] D = inverse(C);
-	writeln("Matrix D = inverse(C) : ");
-	print_matrix(D);
+	writeln("C = A x t(A): ");
+	double[][] C = matmul(A, transpose(B));
+
+	writeln("D = naive_inverse(C): ");
+	double[][] D = naive_inverse(C);
 }

@@ -21,15 +21,15 @@ build_debug:
 
 build_release:
 	$(d_compiler) $(src) $(tests) $(flags_release)
-
-run_debug: build_debug
+	
+run_debug: $(target_debug)
 	./$(target_debug)
-
-run_release: build_release
+	
+run_release: $(target_release)
 	./$(target_release)
 
 clean:
-	rm targets/*.o targets/$(target_debug) targets/$(target_release)
+	rm $(target_debug) $(target_release)
 
 benchmarks:
 	Rscript benchmarks/test.R

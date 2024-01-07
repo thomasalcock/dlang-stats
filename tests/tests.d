@@ -49,7 +49,7 @@ unittest {
 
 unittest {
     import stats: dotproduct, is_close_enough, print_matrix, minor_matrix,
-        determinant, inverse, transpose, matmul, uniform_matrix, trace;
+        determinant, naive_inverse, transpose, matmul, uniform_matrix, trace;
     
     writeln("matrix / linalg functions");      
     double[][] A = [
@@ -126,18 +126,18 @@ unittest {
     assert(is_close_enough(det_A, -2));
     writeln("determinant(testmatrix_2x2) = ", det_A);
 
-    double[][] inv_testmatrix_2x2_actual = inverse(testmatrix_2x2);
+    double[][] inv_testmatrix_2x2_actual = naive_inverse(testmatrix_2x2);
     assert(inv_testmatrix_2x2_actual == inv_testmatrix_2x2);
-    writeln("inverse(testmatrix_2x2)");
+    writeln("naive_inverse(testmatrix_2x2)");
     print_matrix(inv_testmatrix_2x2_actual);
 
     double det_testmatrix_3x3 = determinant(testmatrix_3x3);
     assert(is_close_enough(det_testmatrix_3x3 , -25), "is_close_enough(det_testmatrix_3x3 , -25) != true");
     writeln("determinant(testmatrix_3x3) = ", det_testmatrix_3x3);
 
-    double[][] inv_testmatrix_3x3_actual = inverse(testmatrix_3x3);
+    double[][] inv_testmatrix_3x3_actual = naive_inverse(testmatrix_3x3);
     assert(inv_testmatrix_3x3_actual == inv_testmatrix_3x3, "inv_testmatrix_3x3_actual != inv_testmatrix_3x3");
-    writeln("inverse(testmatrix_3x3)");
+    writeln("naive_inverse(testmatrix_3x3)");
     print_matrix(inv_testmatrix_3x3_actual);
 
     double[][] random_matrix = uniform_matrix(3, 4);
