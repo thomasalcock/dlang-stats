@@ -14,7 +14,7 @@ docs=docs
 flags_release=$(include_paths) -O -inline -D -Dd$(docs) -w -of=$(target_release)
 flags_debug=$(include_paths) -debug -D -Dd$(docs) -w -of=$(target_debug) -unittest
 
-all: run_debug
+all: run_debug run_release
 
 build_debug:
 	$(d_compiler) $(src) $(tests) $(flags_debug)
@@ -22,10 +22,10 @@ build_debug:
 build_release:
 	$(d_compiler) $(src) $(tests) $(flags_release)
 	
-run_debug: $(target_debug)
+run_debug: build_debug 
 	./$(target_debug)
 	
-run_release: $(target_release)
+run_release: build_release 
 	./$(target_release)
 
 clean:

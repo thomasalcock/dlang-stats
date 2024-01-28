@@ -42,3 +42,5 @@ print(inv_testmatrix)
 print("inv(testmatrix_3x3)")
 print(inv_testmatrix_3x3)
 
+print("cov(c(1,2,3), c(3,6, 4))")
+cov(c(1,2,3), c(3,6,4))

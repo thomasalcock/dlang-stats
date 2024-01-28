@@ -18,7 +18,7 @@ unittest {
 
 unittest {
     import stats: mean, standard_deviation, weighted_mean, coef_of_variation, 
-        zscore, is_close_enough, is_close_enough_slice;
+        zscore, is_close_enough, is_close_enough_slice, covariance;
     
     writeln("stats functions");
     double[] x = [1, 2, 3, 4, 5];
@@ -45,6 +45,12 @@ unittest {
     double[] zscores_expected = [-1.41421, -0.707107, 0, 0.707107, 1.41421];
     writeln(is_close_enough_slice(zscores_actual, zscores_expected));
     writeln("zscore(x, mean_x, stddev_x) = ", zscores_actual);
+
+    double[] vec1 = [1, 2, 3];
+    double[] vec2 = [3, 6, 4];
+    double cov = covariance(vec1, vec2);
+    writeln("covariance(vec1, vec2) = ", cov);
+    assert(is_close_enough(cov, 0.5));
 }
 
 unittest {
@@ -144,4 +150,5 @@ unittest {
     assert(random_matrix.length == 3 && random_matrix[0].length == 4);
     writeln("uniform_matrix(3, 4) = ");
     print_matrix(random_matrix);
+
 }

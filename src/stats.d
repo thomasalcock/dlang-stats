@@ -7,6 +7,17 @@ import std.random: uniform;
 // TODO: implement a dimension check that iterates over all
 // rows of a matrix to ensure uniform column dimension
 
+double covariance(double[] x, double[] y) {
+  double result = 0.0;
+  double mean_x = mean(x);
+  double mean_y = mean(y);
+  size_t n = x.length;
+  for(size_t i = 0; i < n; i++) {
+    result += (x[i] - mean_x) * (y[i] - mean_y);
+  }
+  return result / (n -1);
+}
+
 double mean(double[] data) {
   double result = 0.0;
   foreach (ref e; data)
@@ -33,13 +44,17 @@ double weighted_mean(double[] data, double[] weights) {
   return result / data.length;
 }
 
-double standard_deviation(double[] data, ulong degrees_of_freedom = 0) {
+double variance(double[] data, ulong degrees_of_freedom = 0) {
   double result = 0.0;
   double mean = mean(data);
   foreach (ref e; data) {
     result += pow((e - mean), 2);
   }
-  return sqrt(result / (data.length - degrees_of_freedom));
+  return result / (data.length - degrees_of_freedom);
+}
+
+double standard_deviation(double[] data, ulong degrees_of_freedom = 0) {
+	return sqrt(variance(data, degrees_of_freedom = degrees_of_freedom));
 }
 
 double coef_of_variation(double[] data) {
