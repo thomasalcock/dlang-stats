@@ -51,6 +51,14 @@ unittest {
     double cov = covariance(vec1, vec2);
     writeln("covariance(vec1, vec2) = ", cov);
     assert(is_close_enough(cov, 0.5));
+
+  
+    float[] vec3 = [1, 2, 3];
+    float[] vec4 = [3, 6, 4];
+    float cov2 = covariance(vec3, vec4);
+    writeln("covariance(vec3, vec4) = ", cov2);
+    assert(is_close_enough(cov2, 0.5));
+
 }
 
 unittest {

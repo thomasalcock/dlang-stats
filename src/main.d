@@ -5,8 +5,8 @@ import stats: uniform_matrix, naive_inverse,
 
 void main()
 {	
-	ulong nrows = 5;
-	ulong ncols = 5;
+	const ulong nrows = 5;
+	const ulong ncols = 5;
 	
 	writeln("set up matrix A: ");
 	double[][] A = uniform_matrix(nrows, ncols, 3, 10);
@@ -23,4 +23,6 @@ void main()
 	writeln("D = naive_inverse(C): ");
  	double[][] D = naive_inverse(C);
   print_matrix(D);
+  
+  
 }
