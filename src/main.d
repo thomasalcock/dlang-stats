@@ -1,7 +1,8 @@
 module main;
 import std.stdio : writeln;
-import stats: weighted_mean, uniform_matrix, naive_inverse,
-	matmul, transpose, is_square_matrix, print_matrix;
+import linalg;
+import stats;
+import arrays;
 
 void main()
 {	
